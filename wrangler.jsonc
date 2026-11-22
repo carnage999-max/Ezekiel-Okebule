@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ezekiel-okebule-portfolio",
+  // Today's date at time of writing. Compatibility dates are a Workers
+  // concept for opting into runtime behaviour changes without breaking
+  // existing deployments — safe to bump forward on a future deploy, but
+  // there's no reason to backdate it.
+  "compatibility_date": "2026-11-22",
+
+  // Static-assets-only Worker: no `main` script, because there is nothing
+  // dynamic to run yet (no API routes, no analytics endpoint). Cloudflare
+  // serves everything in `directory` directly from the edge without
+  // invoking any Worker code for the common case. When the analytics
+  // feature is built, this file gains a `main` entry pointing at a fetch
+  // handler that intercepts e.g. /api/track and falls through to
+  // `env.ASSETS.fetch(request)` for everything else — not needed yet.
+  "assets": {
+    "directory": "./out",
+    // Next's static export already generates a real out/404.html;
+    // serve that for unmatched paths instead of Workers' generic 404.
+    "not_found_handling": "404-page"
+  }
+}
