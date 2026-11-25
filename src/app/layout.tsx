@@ -105,6 +105,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <head>
+        <meta name="websitelaunches-verification" content="51c97d9b56da3b039eb569f8be835ba0"/>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className="min-h-full bg-background text-foreground">{children}</body>
